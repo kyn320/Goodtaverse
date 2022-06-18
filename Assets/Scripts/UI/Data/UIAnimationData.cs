@@ -12,7 +12,7 @@ public enum UIAnimationType {
     Color
 }
 
-[CreateAssetMenu(fileName = "UIAnimationData", menuName = "UI/AnimationData", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "UIAnimationData", menuName = "UI/AnimationData", order = 0)]
 public class UIAnimationData : ScriptableObject
 {
     [SerializeField]

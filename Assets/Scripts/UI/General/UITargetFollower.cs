@@ -5,26 +5,45 @@ using UnityEngine.UI;
 
 public class UITargetFollower : MonoBehaviour
 {
-    public Transform target;
+    private RectTransform canvasRectTransform;
+    private Camera uiCamera;
+
+    [SerializeField]
+    private Transform target;
+
+    [SerializeField]
+    protected Vector3 targetOffset;
 
     RectTransform rectTransform;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        rectTransform.anchorMax = Vector3.zero;
-        rectTransform.anchorMin = Vector3.zero;
-        rectTransform.pivot = Vector2.one * 0.5f;
+    }
+
+    private void Start()
+    {
+        uiCamera = Camera.main;//UIController.Instance.uiCamera;
+        canvasRectTransform = UIController.Instance.rootCanvas.GetComponent<RectTransform>();
     }
 
     private void FixedUpdate()
     {
-        if (target != null) { 
-            Camera cam = Camera.main;
-            var targetPos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.position);
+        if (target != null)
+        {
+            Vector2 adjustedPosition = uiCamera.WorldToScreenPoint(target.position + targetOffset);
 
-            rectTransform.anchoredPosition = targetPos; 
-        }   
+            adjustedPosition.x *= canvasRectTransform.rect.width / (float)uiCamera.pixelWidth;
+            adjustedPosition.y *= canvasRectTransform.rect.height / (float)uiCamera.pixelHeight;
+
+            // set it
+            rectTransform.anchoredPosition = adjustedPosition - canvasRectTransform.sizeDelta / 2f;
+        }
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
     }
 
 

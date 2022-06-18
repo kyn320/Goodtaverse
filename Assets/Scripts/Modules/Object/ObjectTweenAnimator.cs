@@ -14,6 +14,8 @@ public class ObjectTweenAnimator : MonoBehaviour
         Destroy,
     }
 
+    public bool autoStart = false;
+
     public List<ObjectTweenAnimationData> animationList;
 
     [SerializeField]
@@ -21,6 +23,14 @@ public class ObjectTweenAnimator : MonoBehaviour
     private Coroutine animationCoroutine;
 
     public StopActionType stopActionType;
+
+    private void Start()
+    {
+        if (autoStart)
+        {
+            PlayAnimation();
+        }
+    }
 
     public virtual void PlayAnimation()
     {

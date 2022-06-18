@@ -6,50 +6,51 @@ using UnityEngine.Events;
 
 public class UIController : Singleton<UIController>
 {
+    public Camera uiCamera;
     public Canvas rootCanvas;
     public Transform viewGroup;
 
-    [SerializeField]
-    protected RectTransform popupBackgorund;
     public Transform popupGroup;
 
     public List<UIBaseView> viewList;
     public int popupViewCount = 0;
 
-    public void OpenView(UIBaseView view)
+    public UIBaseView OpenView(UIBaseView view)
     {
         viewList.Add(view);
 
         view.Init(null);
         view.Open();
+
+        return view;
     }
 
-    public void OpenView(UIBaseView view, UIData uiData)
+    public UIBaseView OpenView(UIBaseView view, UIData uiData)
     {
         viewList.Add(view);
 
         view.Init(uiData);
         view.Open();
+
+        return view;
     }
 
-    public void OpenPopup(string popupName)
+    public UIBaseView OpenPopup(string popupName)
     {
         var popupPrefab = Resources.Load<GameObject>($"UI/UI{popupName}Popup");
         var popupObject = Instantiate(popupPrefab, popupGroup);
         var view = popupObject.GetComponent<UIBaseView>();
         ++popupViewCount;
-        OpenView(view);
-        popupBackgorund.gameObject.SetActive(popupViewCount > 0);
+        return OpenView(view);
     }
 
-    public void OpenPopup(UIPopupData popupData)
+    public UIBaseView OpenPopup(UIPopupData popupData)
     {
         var popupPrefab = Resources.Load<GameObject>(popupData.prefabPath);
         var popupObject = Instantiate(popupPrefab, popupGroup);
         var view = popupObject.GetComponent<UIBaseView>();
         ++popupViewCount;
-        OpenView(view, popupData);
-        popupBackgorund.gameObject.SetActive(popupViewCount > 0);
+        return OpenView(view, popupData);
     }
 
     public void CloseView(UIBaseView view)
@@ -63,7 +64,6 @@ public class UIController : Singleton<UIController>
         var view = viewList.Find(item => item.gameObject.name.Equals(popupName));
         --popupViewCount;
         CloseView(view);
-        popupBackgorund.gameObject.SetActive(popupViewCount > 0);
     }
 
     public void ClosePopup(UIPopupData popupData)
@@ -71,7 +71,11 @@ public class UIController : Singleton<UIController>
         var view = viewList.Find(item => item.viewName.Equals(popupData.viewName));
         --popupViewCount;
         CloseView(view);
-        popupBackgorund.gameObject.SetActive(popupViewCount > 0);
+    }
+
+    public GameObject CreateUI(GameObject uiPrefab)
+    {
+        return Instantiate(uiPrefab, rootCanvas.transform);
     }
 
 }

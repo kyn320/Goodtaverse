@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8415e48626aaa5f4c9a2c92ddfaa6dee, type: 3}
+  m_Name: KeySettingData
+  m_EditorClassIdentifier: 
+  keyBindDic:
+    keys: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000
+    values:
+    - name: MoveUp
+      type: 1
+      keyCode: 119
+    - name: MoveDown
+      type: 2
+      keyCode: 115
+    - name: MoveLeft
+      type: 3
+      keyCode: 97
+    - name: MoveRight
+      type: 4
+      keyCode: 100
+    - name: Attack
+      type: 5
+      keyCode: 323
+    - name: Interaction
+      type: 6
+      keyCode: 102
+    - name: CampingItem
+      type: 7
+      keyCode: 112
+    - name: Item1
+      type: 8
+      keyCode: 49
+    - name: Item2
+      type: 9
+      keyCode: 50
+    - name: Item3
+      type: 10
+      keyCode: 51
+    - name: Item4
+      type: 11
+      keyCode: 52
+    - name: Skill1
+      type: 12
+      keyCode: 113
+    - name: Skill2
+      type: 13
+      keyCode: 101
+    - name: Skill3
+      type: 14
+      keyCode: 99
+    - name: Skill4
+      type: 15
+      keyCode: 120
+    - name: Inevntory
+      type: 16
+      keyCode: 105
+    - name: Map
+      type: 17
+      keyCode: 109
+    - name: Menu
+      type: 18
+      keyCode: 27

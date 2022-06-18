@@ -13,7 +13,7 @@ public enum ObjectTweenAnimationType
     Color
 }
 
-[CreateAssetMenu(fileName = "ObjectTweenAnimationData", menuName = "GameObject/TweenAnimationData", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "ObjectTweenAnimationData", menuName = "GameObject/TweenAnimationData", order = 0)]
 public class ObjectTweenAnimationData : ScriptableObject
 {
     [SerializeField]
