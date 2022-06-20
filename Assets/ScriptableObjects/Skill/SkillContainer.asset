@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a284a88f1a10b4485f59ba87ddaa5e, type: 3}
+  m_Name: SkillContainer
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  skillList:
+  - {fileID: 11400000, guid: 774e43cdf818fac40abcfb7b6a7e9dd3, type: 2}
+  - {fileID: 11400000, guid: b4a2f38f07d716d47bc343c5e7620537, type: 2}
+  - {fileID: 11400000, guid: 972f7efc12add3b4796f4237526e5e71, type: 2}
+  - {fileID: 11400000, guid: abda9321a0e74d24c988d1dea487a2ef, type: 2}

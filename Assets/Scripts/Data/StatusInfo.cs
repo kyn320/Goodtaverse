@@ -33,7 +33,7 @@ public class StatusInfo
 
     public float CalculateDefence(float damage)
     {
-        var defenceDamage = damage - statusDic[StatusType.Defence].amount;
+        var defenceDamage = damage - statusDic[StatusType.Shield].amount;
         return 0;
     }
 }

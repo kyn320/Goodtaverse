@@ -7452,6 +7452,7 @@ GameObject:
   - component: {fileID: 6061823760935735936}
   - component: {fileID: 6061823760935735938}
   - component: {fileID: 6061823760935735937}
+  - component: {fileID: 2690219868137070188}
   m_Layer: 5
   m_Name: UIEquipPopup
   m_TagString: Untagged
@@ -7520,6 +7521,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2690219868137070188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061823760935736063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0031f6380704474f9675fa4302a2531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6061823760938371598
 GameObject:
   m_ObjectHideFlags: 0

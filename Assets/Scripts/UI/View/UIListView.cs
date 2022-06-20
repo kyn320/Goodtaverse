@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UIListView<T> : MonoBehaviour where T : MonoBehaviour
 {
+    [SerializeField]
+    protected ScrollRect scrollRect;
+
     public RectTransform contentParent;
 
     public GameObject contentPrefab;
@@ -30,13 +33,26 @@ public class UIListView<T> : MonoBehaviour where T : MonoBehaviour
         return content;
     }
 
-    public void RemoveAll() {
-        foreach (var content in contentList) {
+    public void RemoveAll()
+    {
+        foreach (var content in contentList)
+        {
             content.gameObject.SetActive(false);
             unUsedContentQueue.Enqueue(content);
         }
 
         contentList.Clear();
     }
+
+    public void ScrollHorizontal(float positionX)
+    {
+        scrollRect.horizontalNormalizedPosition = positionX;
+    }
+
+    public void ScrollVertical(float positionY)
+    {
+        scrollRect.verticalNormalizedPosition = positionY;
+    }
+
 
 }

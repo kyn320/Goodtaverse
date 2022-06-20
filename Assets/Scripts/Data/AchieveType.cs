@@ -7,5 +7,6 @@ public enum AchieveType
 {
     None,
     //TODO :: Parser Type Add
+    //¾ÆÁ÷ ¸ô?·ç
 
 }

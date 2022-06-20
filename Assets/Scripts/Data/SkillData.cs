@@ -7,9 +7,24 @@ public class SkillData : ScriptableObject
 {
     public int id;
     public string skillName;
+    [TextArea]
     public string description;
     public Sprite icon;
 
-    public float coolTime;
+    public List<WeaponType> allowTypeList;
+    public SkillCastType castType;
+    public SkillActionType actionType;
+
+    public StatusInfo originStatusInfo;
+    public float castCenterTime;
+    public List<AmountRangeFloat> holdLevelList;
+
+    public StatusInfo addStatusInfo;
+    public StatusInfo subStatusInfo;
+
     public GameObject skillObject;
+
+    public bool CheckAllowWeapon(WeaponType weaponType) { 
+        return allowTypeList.Contains(weaponType);
+    }
 }

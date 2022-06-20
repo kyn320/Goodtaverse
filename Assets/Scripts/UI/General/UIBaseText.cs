@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using TMPro;
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class UIBaseText : MonoBehaviour
 {
     [ShowInInspector]
     [ReadOnly]
-    private Text text;
+    protected TextMeshProUGUI text;
 
     [SerializeField]
     protected string frontAdditionalText = "";
     [SerializeField]
     protected string backAdditionalText = "";
+    [SerializeField]
+    protected string viewFormat = "";
 
     [Button("¿ÀÅä Ä³½Ì")]
     public void AutoCaching()
     {
-        text = GetComponent<Text>();
+        text = GetComponent<TextMeshProUGUI>();
     }
 
     private void Awake()
@@ -32,7 +35,7 @@ public class UIBaseText : MonoBehaviour
         if (text == null)
             AutoCaching();
 
-        text.text = frontAdditionalText + context + backAdditionalText;
+        text.text = $"{frontAdditionalText}{(string.IsNullOrEmpty(viewFormat) ? context : string.Format(viewFormat, context))}{backAdditionalText}";
     }
 
 }

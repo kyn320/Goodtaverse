@@ -13,7 +13,32 @@ MonoBehaviour:
   m_Name: SkillData
   m_EditorClassIdentifier: 
   id: 0
-  skillName: 
-  description: 
-  icon: {fileID: 0}
+  skillName: "\uC2A4\uD0AC \uC774\uB9841"
+  description: "\uC2A4\uD0AC \uC124\uBA85\uC744 \uC4F8 \uC218 \uC788\uC5B4\uC694."
+  icon: {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
+  allowTypeList: 02000000
+  castType: 1
+  actionType: 0
+  originStatusInfo:
+    statusDic:
+      keys: 1500000003000000
+      values:
+      - type: 21
+        name: 
+        amount: 12
+        percent: 0
+      - type: 3
+        name: 
+        amount: 100
+        percent: 0
+  castCenterTime: 0
+  holdLevelList: []
+  addStatusInfo:
+    statusDic:
+      keys: 
+      values: []
+  subStatusInfo:
+    statusDic:
+      keys: 
+      values: []
   skillObject: {fileID: 0}
