@@ -3,43 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class ColliderEventSender : MonoBehaviour
 {
-    public UnityEvent<Collision> collisionEnterEvent;
-    public UnityEvent<Collision> collisionStayEvent;
-    public UnityEvent<Collision> collisionExitEvent;
+    public UnityEvent<Collision2D> collisionEnterEvent;
+    public UnityEvent<Collision2D> collisionStayEvent;
+    public UnityEvent<Collision2D> collisionExitEvent;
 
-    public UnityEvent<Collider> triggerEnterEvent;
-    public UnityEvent<Collider> triggerStayEvent;
-    public UnityEvent<Collider> triggerExitEvent;
+    public UnityEvent<Collider2D> triggerEnterEvent;
+    public UnityEvent<Collider2D> triggerStayEvent;
+    public UnityEvent<Collider2D> triggerExitEvent;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         collisionEnterEvent?.Invoke(collision);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         collisionStayEvent?.Invoke(collision);
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         collisionExitEvent?.Invoke(collision);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         triggerEnterEvent?.Invoke(other);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         triggerStayEvent?.Invoke(other);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         triggerExitEvent?.Invoke(other);
     }

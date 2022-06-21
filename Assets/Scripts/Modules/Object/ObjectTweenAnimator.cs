@@ -14,8 +14,6 @@ public class ObjectTweenAnimator : MonoBehaviour
         Destroy,
     }
 
-    public bool autoStart = false;
-
     public List<ObjectTweenAnimationData> animationList;
 
     [SerializeField]
@@ -24,14 +22,7 @@ public class ObjectTweenAnimator : MonoBehaviour
 
     public StopActionType stopActionType;
 
-    private void Start()
-    {
-        if (autoStart)
-        {
-            PlayAnimation();
-        }
-    }
-
+    [Button("½ÇÇà")]
     public virtual void PlayAnimation()
     {
         PlayAnimation(animationList, null);
@@ -60,6 +51,22 @@ public class ObjectTweenAnimator : MonoBehaviour
                     break;
                 case ObjectTweenAnimationType.Scale:
                     tween = transform.DOScale(Vector3.one * animationData.DestinationFloat, animationData.Duration);
+                    break;
+                case ObjectTweenAnimationType.CameraShakePosition:
+                    tween = Camera.main.DOShakePosition(animationData.Duration, animationData.Strength, animationData.Vibrato, animationData.Randomness);
+                    break;
+                case ObjectTweenAnimationType.CameraShakeRotation:
+                    tween = Camera.main.DOShakeRotation(animationData.Duration, animationData.Strength, animationData.Vibrato, animationData.Randomness);
+                    break;
+                case ObjectTweenAnimationType.CameraFov:
+                    if (Camera.main.orthographic)
+                    {
+                        tween = Camera.main.DOOrthoSize(animationData.DestinationFloat, animationData.Duration);
+                    }
+                    else
+                    {
+                        tween = Camera.main.DOFieldOfView(animationData.DestinationFloat, animationData.Duration);
+                    }
                     break;
             }
 

@@ -70,6 +70,10 @@ public enum StatusType
     /// </summary>
     Shield,
     /// <summary>
+    /// 최대 쉴드량
+    /// </summary>
+    MaxShield,
+    /// <summary>
     /// 체력 자연 회복량
     /// </summary>
     RecoverHP,

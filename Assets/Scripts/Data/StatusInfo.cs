@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
@@ -27,13 +28,13 @@ public class StatusInfo
 
     public float CalculateDamage()
     {
-        var damage = statusDic[StatusType.Attack].amount;
+        var damage = statusDic[StatusType.Attack].GetAmount();
         return damage;
     }
 
     public float CalculateDefence(float damage)
     {
-        var defenceDamage = damage - statusDic[StatusType.Shield].amount;
+        var defenceDamage = damage - statusDic[StatusType.Shield].GetAmount();
         return 0;
     }
 }

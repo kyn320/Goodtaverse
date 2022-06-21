@@ -14,6 +14,10 @@ public class AmountRangeInt
         this.max = max;
     }
 
+    public float GetRange(float progress) { 
+        return (max - min) * progress + min;
+    }
+
     public int GetRandomAmount()
     {
         return Random.Range(min, max);
@@ -31,6 +35,10 @@ public class AmountRangeFloat
         this.min = min;
         this.max = max;
     }
+    public float GetRange(float progress)
+    {
+        return (max - min) * progress + min;
+    }
 
     public float GetRandomAmount() { 
        return Random.Range(min, max); 
@@ -47,6 +55,11 @@ public class AmountRangeVector2
     {
         this.min = min;
         this.max = max;
+    }
+
+    public Vector2 GetRange(float progress)
+    {
+        return (max - min) * progress + min;
     }
 
     public Vector2 GetRandomAmount()
@@ -70,6 +83,12 @@ public class AmountRangeVector3
         this.min = min;
         this.max = max;
     }
+
+    public Vector3 GetRange(float progress)
+    {
+        return (max - min) * progress + min;
+    }
+
     public Vector3 GetRandomAmount()
     {
         var random = Vector3.zero;

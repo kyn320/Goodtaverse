@@ -25,4 +25,9 @@ public class KeySettingData : ScriptableObject
         }
     }
 
+    public KeyBind GetKeyBind(KeyType keyType)
+    {
+        return keyBindDic[keyType];
+    }
+
 }

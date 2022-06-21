@@ -36,8 +36,8 @@ public class UISkillDescription : MonoBehaviour
         }
         weaponText.SetText(allowWeaponDescription.ToString());
         actionTypeText.SetText(skillData.actionType.ToString());
-        coolTimeText.UpdateAmount(skillData.originStatusInfo.GetElement(StatusType.CoolTime).amount);
-        spendMPText.UpdateAmount(skillData.originStatusInfo.GetElement(StatusType.MP).amount);
+        coolTimeText.UpdateAmount(skillData.originStatusInfo.GetElement(StatusType.CoolTime).GetAmount());
+        spendMPText.UpdateAmount(skillData.originStatusInfo.GetElement(StatusType.MP).GetAmount());
         descriptionText.SetText(skillData.description);
 
     }

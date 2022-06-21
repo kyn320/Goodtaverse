@@ -7,6 +7,8 @@ public class AttackInfoData : ScriptableObject
 {
     public string attackName;
 
+    public StatusInfoData statusInfoData;
+
     public float waitForStartTime = 1;
     public float attackTime = 2;
     public float waitForEndTime = 1;

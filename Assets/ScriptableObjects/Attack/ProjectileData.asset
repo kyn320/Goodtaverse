@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ac9b016e49fb14b9a375c939669b45, type: 3}
+  m_Name: ProjectileData
+  m_EditorClassIdentifier: 
+  attackName: 
+  statusInfoData: {fileID: 0}
+  waitForStartTime: 1
+  attackTime: 2
+  waitForEndTime: 1
+  startTriggerList: []
+  updateTriggerList: []
+  endTriggerList: []
+  attackVfx: {fileID: 0}
+  damagedVfx: {fileID: 0}

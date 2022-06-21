@@ -19,6 +19,11 @@ public class UIBattleGauge : MonoBehaviour
     [SerializeField]
     protected UICompareAmountText mpAmountText;
 
+    public void Start()
+    {
+        
+    }
+
     public void UpdateHP(float current, float max) {
         hpGauge.UpdateGauge(current,max);
         hpAmountText.UpdateAmount(current,max); 

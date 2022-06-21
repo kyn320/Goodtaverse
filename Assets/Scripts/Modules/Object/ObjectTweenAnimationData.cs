@@ -10,7 +10,10 @@ public enum ObjectTweenAnimationType
     Move,
     Rotate,
     Scale,
-    Color
+    Color,
+    CameraShakePosition,
+    CameraShakeRotation,
+    CameraFov,
 }
 
 [CreateAssetMenu(fileName = "ObjectTweenAnimationData", menuName = "GameObject/TweenAnimationData", order = 0)]
@@ -55,6 +58,18 @@ public class ObjectTweenAnimationData : ScriptableObject
     [SerializeField]
     private Vector3 destinationVector;
     public Vector3 DestinationVector { get { return destinationVector; } }
+
+    [SerializeField]
+    private float strength;
+    public float Strength { get { return strength; } }
+
+    [SerializeField]
+    private int vibrato;
+    public int Vibrato { get { return vibrato; } }
+
+    [SerializeField]
+    private float randomness;
+    public float Randomness { get { return randomness; } }
 
     [SerializeField]
     private bool isRelative;
