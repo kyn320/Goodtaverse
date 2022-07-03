@@ -22,6 +22,15 @@ public class ObjectTweenAnimator : MonoBehaviour
 
     public StopActionType stopActionType;
 
+    [SerializeField]
+    bool autoStartPlay = false;
+
+    private void Start()
+    {
+        if (autoStartPlay)
+            PlayAnimation();
+    }
+
     [Button("½ÇÇà")]
     public virtual void PlayAnimation()
     {

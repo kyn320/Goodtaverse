@@ -22,6 +22,7 @@ public class PlayerStatus : UnitStatus
 
     public override bool OnDamage(float damage)
     {
+        CameraController.Instance.AnimateDamaged();
         return playerStatusSystem.AddHP(-damage);
     }
 

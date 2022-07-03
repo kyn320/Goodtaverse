@@ -10,6 +10,9 @@ public class PlayerController : UnitController
     private Animator animator;
 
     [SerializeField]
+    private WeaponController weaponController;
+
+    [SerializeField]
     protected Vector3 moveDirection;
 
     private Vector3 moveInputDirection;
@@ -98,5 +101,11 @@ public class PlayerController : UnitController
         return isDeath;
     }
 
+    public void Attack(Vector3 mousePoint)
+    {
+        ++currentCombo;
+        currentCombo %= maxCombo;
+        comboUpdateEvent?.Invoke(currentCombo);
+    }
 
 }

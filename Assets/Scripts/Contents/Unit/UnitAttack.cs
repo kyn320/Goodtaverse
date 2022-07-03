@@ -5,13 +5,14 @@ using UnityEngine.Events;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(UnitStatus))]
 public class UnitAttack : SerializedMonoBehaviour
 {
     private UnitStatus unitStatus;
 
     public Transform attackPoint;
-    public Animator animator;
+
+    public List<Animator> animatorList;
+
     [SerializeField]
     public Dictionary<int, AttackInfoData> attackDataDic = new Dictionary<int, AttackInfoData>();
 
@@ -23,10 +24,11 @@ public class UnitAttack : SerializedMonoBehaviour
     public UnityEvent updateAttackEvent;
     public UnityEvent endAttackEvent;
 
-    private bool isFirstHit = true;
+    [SerializeField]
+    private bool useAttackAnimation = true;
 
-    private int currentComboCount = 0;
-    public UnityEvent<int> comboCountUpdateEvent;
+    private int currentHitCount = 0;
+    public UnityEvent<int> hitCountUpdateEvent;
 
     private void Awake()
     {
@@ -35,9 +37,8 @@ public class UnitAttack : SerializedMonoBehaviour
 
     public void Attack(int combo)
     {
-        isFirstHit = true;
         prevCombo = combo;
-        currentComboCount = 0;
+        currentHitCount = 0;
         currentAttackInfo = attackDataDic[combo];
         StartAttack();
     }
@@ -51,15 +52,11 @@ public class UnitAttack : SerializedMonoBehaviour
 
         if (damageAble != null)
         {
-            if (isFirstHit)
-            {
+            if (useAttackAnimation)
                 CameraController.Instance.AnimateHit();
 
-                isFirstHit = false;
-            }
-
-            ++currentComboCount;
-            comboCountUpdateEvent?.Invoke(currentComboCount);
+            ++currentHitCount;
+            hitCountUpdateEvent?.Invoke(currentHitCount);
 
             var damagePoint = collider.ClosestPoint(currentHitBox.transform.position);
 
@@ -69,7 +66,35 @@ public class UnitAttack : SerializedMonoBehaviour
 
             CheckKill(isKill);
 
-            var damageVFX = Instantiate(currentAttackInfo.damagedVfx);
+            var damageVFX = ObjectPoolManager.Instance.Get(currentAttackInfo.damagedVfx.name);
+            damageVFX.transform.position = damagePoint;
+        }
+    }
+
+    public void Damage(Collider2D hitBox, Collider2D collider)
+    {
+        var damageAble = collider.GetComponent<IDamageable>();
+        var damageAmount = unitStatus.currentStatus.CalculateDamage();
+
+        Debug.Log("name : " + collider.gameObject.name + " | Damage : " + damageAmount);
+
+        if (damageAble != null)
+        {
+            if (useAttackAnimation)
+                CameraController.Instance.AnimateHit();
+
+            ++currentHitCount;
+            hitCountUpdateEvent?.Invoke(currentHitCount);
+
+            var damagePoint = collider.ClosestPoint(hitBox.transform.position);
+
+            var isKill = damageAble.OnDamage(damageAmount,
+                damagePoint,
+                Vector3.up);
+
+            CheckKill(isKill);
+
+            var damageVFX = ObjectPoolManager.Instance.Get(currentAttackInfo.damagedVfx.name);
             damageVFX.transform.position = damagePoint;
         }
     }
@@ -85,7 +110,11 @@ public class UnitAttack : SerializedMonoBehaviour
     private async void UpdateAttack()
     {
         //TODO :: Create VFX
-        var attackVFX = Instantiate(currentAttackInfo.attackVfx);
+
+        if (currentAttackInfo.attackVfx == null)
+            return;
+
+        var attackVFX = ObjectPoolManager.Instance.Get(currentAttackInfo.attackVfx.name);
         var lookat = attackVFX.transform.rotation.eulerAngles;
         lookat.y = transform.rotation.eulerAngles.y;
 
@@ -116,8 +145,9 @@ public class UnitAttack : SerializedMonoBehaviour
         endAttackEvent?.Invoke();
     }
 
-    protected void CheckKill(bool isKill) { 
-        if(!isKill)
+    protected void CheckKill(bool isKill)
+    {
+        if (!isKill)
             return;
 
     }
@@ -126,7 +156,10 @@ public class UnitAttack : SerializedMonoBehaviour
     {
         for (var i = 0; i < triggerDatas.Count; ++i)
         {
-            triggerDatas[i].Invoke(animator);
+            for (var j = 0; j < animatorList.Count; ++j)
+            {
+                triggerDatas[i].Invoke(animatorList[j]);
+            }
         }
     }
 

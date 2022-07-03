@@ -21,16 +21,18 @@ MonoBehaviour:
   actionType: 0
   originStatusInfo:
     statusDic:
-      keys: 1500000003000000
+      keys: 16000000
       values:
-      - type: 21
+      - type: 22
         name: 
-        amount: 2
+        amount: 10
         percent: 0
-      - type: 3
-        name: 
-        amount: 25
-        percent: 0
+        updateAmountEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        updatePercentEvent:
+          m_PersistentCalls:
+            m_Calls: []
   castCenterTime: 0
   holdLevelList: []
   addStatusInfo:
@@ -39,6 +41,16 @@ MonoBehaviour:
       values: []
   subStatusInfo:
     statusDic:
-      keys: 
-      values: []
+      keys: 03000000
+      values:
+      - type: 3
+        name: 
+        amount: 100
+        percent: 0
+        updateAmountEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        updatePercentEvent:
+          m_PersistentCalls:
+            m_Calls: []
   skillObject: {fileID: 0}

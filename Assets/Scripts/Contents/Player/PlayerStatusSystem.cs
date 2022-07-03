@@ -6,6 +6,8 @@ using Sirenix.OdinInspector;
 
 public class PlayerStatusSystem : Singleton<PlayerStatusSystem>
 {
+    [SerializeField]
+    private StatusInfoData originStatusData;
     public StatusInfo currentStatus;
     public bool isDeath = false;
 
@@ -14,6 +16,16 @@ public class PlayerStatusSystem : Singleton<PlayerStatusSystem>
     public UnityEvent<float, float> updateShieldEvent;
 
     public UnityEvent<bool> updateDeathEvent;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (originStatusData != null)
+        {
+            currentStatus.Copy(originStatusData.statusDic);
+        }
+    }
 
     public bool AddHP(float amount)
     {

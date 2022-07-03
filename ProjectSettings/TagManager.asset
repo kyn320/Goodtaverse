@@ -52,6 +52,15 @@ TagManager:
   - name: FowardGround
     uniqueID: 2609241155
     locked: 0
+  - name: WorldParticle
+    uniqueID: 3774751713
+    locked: 0
   - name: Sky
     uniqueID: 229696835
+    locked: 0
+  - name: UI
+    uniqueID: 719027227
+    locked: 0
+  - name: UIParticle
+    uniqueID: 1180566695
     locked: 0

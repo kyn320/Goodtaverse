@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
+[RequireComponent(typeof(CanvasGroup))]
 public abstract class UIBaseView : MonoBehaviour
 {
     public string viewName = "";
@@ -18,6 +19,8 @@ public abstract class UIBaseView : MonoBehaviour
 
     public UnityEvent openEvent;
     public UnityEvent closeEvent;
+
+    private List<Tween> playAnimationList = new List<Tween>();
 
     public abstract void Init(UIData uiData);
 
@@ -47,6 +50,12 @@ public abstract class UIBaseView : MonoBehaviour
 
     public virtual void PlayAnimation(List<UIAnimationData> animations, UnityAction completeEvent = null)
     {
+        for(var i = 0; i < playAnimationList.Count; ++i) {
+            playAnimationList[i].Kill(true);
+        }
+
+        playAnimationList.Clear();
+
         currentAnimationPlayCount = animations.Count;
         for (var i = 0; i < animations.Count; ++i)
         {
@@ -66,6 +75,9 @@ public abstract class UIBaseView : MonoBehaviour
                 case UIAnimationType.Color:
                     tween = GetComponent<Graphic>()?.DOColor(animationData.DestinationColor, animationData.Duration);
                     break;
+                case UIAnimationType.Alpha:
+                    tween = GetComponent<CanvasGroup>()?.DOFade(animationData.DestinationFloat, animationData.Duration);
+                    break;
             }
 
             if (animationData.LoopCount > 0)
@@ -74,8 +86,12 @@ public abstract class UIBaseView : MonoBehaviour
             }
             tween.SetDelay(animationData.Delay);
             tween.SetEase(animationData.EaseType);
-            tween.OnComplete(() => { --currentAnimationPlayCount; });
+            tween.OnComplete(() => { 
+                playAnimationList.Remove(tween);
+                --currentAnimationPlayCount;
+            });
             tween.SetRelative(animationData.IsRelative);
+            playAnimationList.Add(tween);
             tween.Play();
         }
 

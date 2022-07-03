@@ -9,7 +9,8 @@ public enum UIAnimationType {
     Move,
     Rotate,
     Scale,
-    Color
+    Color,
+    Alpha,
 }
 
 [CreateAssetMenu(fileName = "UIAnimationData", menuName = "UI/AnimationData", order = 0)]
