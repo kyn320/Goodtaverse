@@ -23,7 +23,16 @@ public class UITweenAnimator : MonoBehaviour
 
     public StopActionType stopActionType;
 
+    [SerializeField]
+    private bool autoActiveByPlay = false;
+    [SerializeField]
+    bool autoStartPlay = false;
 
+    private void Start()
+    {
+        if (autoStartPlay)
+            PlayAnimation();
+    }
     public virtual void PlayAnimation()
     {
         PlayAnimation(animationList, null);
@@ -36,6 +45,9 @@ public class UITweenAnimator : MonoBehaviour
 
     public virtual void PlayAnimation(List<UIAnimationData> animations, UnityAction completeEvent = null)
     {
+        if(autoActiveByPlay)
+            gameObject.SetActive(true);
+
         currentAnimationPlayCount = animations.Count;
         for (var i = 0; i < animations.Count; ++i)
         {
@@ -50,10 +62,13 @@ public class UITweenAnimator : MonoBehaviour
                     tween = transform.DOLocalRotate(animationData.DestinationVector, animationData.Duration);
                     break;
                 case UIAnimationType.Scale:
-                    tween = transform.DOScale(Vector3.one * animationData.DestinationFloat, animationData.Duration);
+                    tween = transform.DOScale(animationData.DestinationVector, animationData.Duration);
                     break;
                 case UIAnimationType.Color:
                     tween = GetComponent<Graphic>()?.DOColor(animationData.DestinationColor, animationData.Duration);
+                    break;
+                case UIAnimationType.Alpha:
+                    tween = GetComponent<CanvasGroup>()?.DOFade(animationData.DestinationFloat, animationData.Duration);
                     break;
             }
 
@@ -68,7 +83,7 @@ public class UITweenAnimator : MonoBehaviour
             tween.Play();
         }
 
-        animationCoroutine = StartCoroutine("CoWaitCompleteAnimation", completeEvent);
+        animationCoroutine = StartCoroutine(CoWaitCompleteAnimation(completeEvent));
     }
 
     private IEnumerator CoWaitCompleteAnimation(UnityAction completeEvent)

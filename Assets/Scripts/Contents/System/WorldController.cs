@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldController : MonoBehaviour
+public class WorldController : Singleton<WorldController>
 {
     public Light sunLight;
 

@@ -13,32 +13,32 @@ public class ColliderEventSender : MonoBehaviour
     public UnityEvent<Collider2D> triggerStayEvent;
     public UnityEvent<Collider2D> triggerExitEvent;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         collisionEnterEvent?.Invoke(collision);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         collisionStayEvent?.Invoke(collision);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    protected virtual void OnCollisionExit2D(Collision2D collision)
     {
         collisionExitEvent?.Invoke(collision);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         triggerEnterEvent?.Invoke(other);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {
         triggerStayEvent?.Invoke(other);
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         triggerExitEvent?.Invoke(other);
     }

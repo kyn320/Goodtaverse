@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AimController : MonoBehaviour
+public class AimController : Singleton<AimController>
 {
-    public KeySettingData keySetting;
+    private KeySettingData keySettingData;
 
     public UnityEvent<Vector3> updateScreenMousePointEvent;
     public UnityEvent<Vector3> updateWorldMousePointEvent;
@@ -21,7 +21,10 @@ public class AimController : MonoBehaviour
     public Vector3 mouseScreenPoint;
     public Vector3 mouseWorldPoint;
 
-    private RaycastHit2D raycastHit;
+    private void Start()
+    {
+        keySettingData = SettingManager.Instance.keySetting;
+    }
 
     public void Update()
     {
@@ -31,14 +34,14 @@ public class AimController : MonoBehaviour
         mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         updateWorldMousePointEvent?.Invoke(mouseWorldPoint);
 
-        if (Input.GetKeyDown(keySetting.GetKeyBind(KeyType.Attack).keyCode))
+        if (Input.GetKeyDown(keySettingData.GetKeyBind(KeyType.Attack).keyCode))
         {
             //Attack KeyDown
             keyDownEvent?.Invoke(mouseWorldPoint);
             isHold = true;
         }
 
-        if (Input.GetKeyUp(keySetting.GetKeyBind(KeyType.Attack).keyCode))
+        if (Input.GetKeyUp(keySettingData.GetKeyBind(KeyType.Attack).keyCode))
         {
             //Attack KeyUp   
             keyUpEvent?.Invoke(mouseWorldPoint);

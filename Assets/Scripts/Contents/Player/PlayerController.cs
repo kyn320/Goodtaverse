@@ -6,6 +6,8 @@ using Newtonsoft.Json.Linq;
 
 public class PlayerController : UnitController
 {
+    private KeySettingData keySettingData;
+
     [SerializeField]
     private Animator animator;
 
@@ -21,13 +23,21 @@ public class PlayerController : UnitController
     [SerializeField]
     protected UnityEvent<Vector3> moveUpdateEvent;
 
-    public int currentCombo = 0;
-    public int maxCombo = 3;
     [SerializeField]
-    protected UnityEvent<int> comboUpdateEvent;
+    protected int currentCombo = 0;
+    [SerializeField]
+    protected int maxCombo = 3;
+
+    public UnityEvent<int> comboUpdateEvent;
+    public UnityEvent<Vector3> mouseDownEvent;
 
     [SerializeField]
     protected bool isInput = true;
+
+    private void Start()
+    {
+        keySettingData = SettingManager.Instance.keySetting;
+    }
 
     public void SetInput(bool isInput)
     {
@@ -41,18 +51,18 @@ public class PlayerController : UnitController
 
         if (Mathf.Abs(oldMoveInputDirection.x) == 0)
         {
-            if (Input.GetKeyDown(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveLeft).keyCode))
+            if (Input.GetKeyDown(keySettingData.GetKeyBind(KeyType.MoveLeft).keyCode))
             {
                 moveInputDirection.x = -1;
             }
-            if (Input.GetKeyDown(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveRight).keyCode))
+            if (Input.GetKeyDown(keySettingData.GetKeyBind(KeyType.MoveRight).keyCode))
             {
                 moveInputDirection.x = 1;
             }
         }
         else {
-            if (Input.GetKeyUp(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveLeft).keyCode)
-                || Input.GetKeyUp(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveRight).keyCode))
+            if (Input.GetKeyUp(keySettingData.GetKeyBind(KeyType.MoveLeft).keyCode)
+                || Input.GetKeyUp(keySettingData.GetKeyBind(KeyType.MoveRight).keyCode))
             {
                 moveInputDirection.x = 0;
             }
@@ -60,19 +70,19 @@ public class PlayerController : UnitController
 
         if (Mathf.Abs(oldMoveInputDirection.y) == 0)
         {
-            if (Input.GetKeyDown(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveDown).keyCode))
+            if (Input.GetKeyDown(keySettingData.GetKeyBind(KeyType.MoveDown).keyCode))
             {
                 moveInputDirection.y = -1;
             }
-            if (Input.GetKeyDown(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveUp).keyCode))
+            if (Input.GetKeyDown(keySettingData.GetKeyBind(KeyType.MoveUp).keyCode))
             {
                 moveInputDirection.y = 1;
             }
         }
         else
         {
-            if (Input.GetKeyUp(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveDown).keyCode)
-                || Input.GetKeyUp(SettingManager.Instance.keySetting.GetKeyBind(KeyType.MoveUp).keyCode))
+            if (Input.GetKeyUp(keySettingData.GetKeyBind(KeyType.MoveDown).keyCode)
+                || Input.GetKeyUp(keySettingData.GetKeyBind(KeyType.MoveUp).keyCode))
             {
                 moveInputDirection.y = 0;
             }

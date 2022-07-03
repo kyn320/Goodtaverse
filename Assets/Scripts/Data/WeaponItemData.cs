@@ -8,4 +8,5 @@ public class WeaponItemData : ItemData
     public EquipType equipType;
     public WeaponType weaponType;
     public GameObject weaponObject;
+    public List<AttackInfoData> chainInfoList;
 }

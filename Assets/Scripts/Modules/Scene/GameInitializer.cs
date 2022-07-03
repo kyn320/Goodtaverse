@@ -19,7 +19,7 @@ public class GameInitializer : MonoBehaviour
 
     private void EndReached(VideoPlayer vp)
     {
-        SceneLoader.Instance.LoadScene(nextScene);
+        SceneLoader.Instance.SwitchScene(nextScene);
     }
 
 }

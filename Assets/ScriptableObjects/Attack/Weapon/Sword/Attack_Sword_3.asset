@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d467b0f5ade3b4da6c72fc8713eac1, type: 3}
   m_Name: Attack_Sword_3
   m_EditorClassIdentifier: 
-  attackName: 
+  attackName: Sword_Combo3
   statusInfoData: {fileID: 0}
   waitForStartTime: 1
   attackTime: 2

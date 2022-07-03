@@ -28,7 +28,7 @@ public class UITitleView : UIBaseView
 
     public void EnterGame()
     {
-        SceneLoader.Instance.LoadScene("HouseScene");
+        SceneLoader.Instance.SwitchScene("HouseScene");
     }
 
     public void ExitGame()

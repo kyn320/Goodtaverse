@@ -46,6 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDontDestroy: 1
   dayNightRule: {fileID: 11400000, guid: da53b6dd78c5cd9478f672f14654708b, type: 2}
+  updateHourTimeEvent:
+    m_PersistentCalls:
+      m_Calls: []
   updateTodayTimeEvent:
     m_PersistentCalls:
       m_Calls: []

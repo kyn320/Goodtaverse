@@ -7,8 +7,14 @@ public class SoundManager : Singleton<SoundManager>
 {
     public const int MaxSFXPlayCount = 5;
 
-    private float BGMVolume;
-    private float SFXVolume;
+    private float bgmVolume;
+    public float BGMVolume { 
+        get { return bgmVolume; }
+    }
+    private float sfxVolume;
+    public float SFXVolume {
+        get { return sfxVolume; }
+    }
 
     private AudioSource bgmAudioPlayer;
 
@@ -20,23 +26,23 @@ public class SoundManager : Singleton<SoundManager>
         bgmAudioPlayer = GetComponent<AudioSource>();
         base.Awake();
 
-        BGMVolume = PlayerPrefs.GetFloat("BGM", 0.5f);
-        SFXVolume = PlayerPrefs.GetFloat("SFX", 0.5f);
+        bgmVolume = PlayerPrefs.GetFloat("BGM", 0.5f);
+        sfxVolume = PlayerPrefs.GetFloat("SFX", 0.5f);
 
-        bgmAudioPlayer.volume = BGMVolume;
+        bgmAudioPlayer.volume = bgmVolume;
 
     }
 
     public void ChangeBGMVolume(float bgm)
     {
-        BGMVolume = bgm;
-        bgmAudioPlayer.volume = BGMVolume;
-        PlayerPrefs.SetFloat("BGM", BGMVolume);
+        bgmVolume = bgm;
+        bgmAudioPlayer.volume = bgmVolume;
+        PlayerPrefs.SetFloat("BGM", bgmVolume);
     }
 
     public void ChangeSFXVolume(float sfx)
     {
-        SFXVolume = sfx;
+        sfxVolume = sfx;
 
         var keyList = sfxPlayerDic.Keys.ToList();
 
@@ -45,7 +51,7 @@ public class SoundManager : Singleton<SoundManager>
             sfxPlayerDic[keyList[i]].ChangeVolume(sfx);
         }
 
-        PlayerPrefs.SetFloat("SFX", SFXVolume);
+        PlayerPrefs.SetFloat("SFX", sfxVolume);
     }
 
     public void PlayBGM(AudioClip bgm)
@@ -86,7 +92,7 @@ public class SoundManager : Singleton<SoundManager>
             {
                 var sfxGo = Instantiate(sfxPlayerPrefab, groupGo.transform);
                 var sfxPlayer = sfxGo.GetComponent<SoundPoolPlayer>();
-                sfxPlayer.ChangeVolume(SFXVolume);
+                sfxPlayer.ChangeVolume(sfxVolume);
                 sfxPlayers.Add(sfxPlayer);
             }
 

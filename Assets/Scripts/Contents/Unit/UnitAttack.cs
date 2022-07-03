@@ -30,12 +30,12 @@ public class UnitAttack : SerializedMonoBehaviour
     private int currentHitCount = 0;
     public UnityEvent<int> hitCountUpdateEvent;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         unitStatus = GetComponent<UnitStatus>();
     }
 
-    public void Attack(int combo)
+    public virtual void Attack(int combo)
     {
         prevCombo = combo;
         currentHitCount = 0;
@@ -43,7 +43,7 @@ public class UnitAttack : SerializedMonoBehaviour
         StartAttack();
     }
 
-    public void Damage(Collider2D collider)
+    public virtual void Damage(Collider2D collider, Vector3 hitPoint)
     {
         var damageAble = collider.GetComponent<IDamageable>();
         var damageAmount = unitStatus.currentStatus.CalculateDamage();
@@ -58,48 +58,18 @@ public class UnitAttack : SerializedMonoBehaviour
             ++currentHitCount;
             hitCountUpdateEvent?.Invoke(currentHitCount);
 
-            var damagePoint = collider.ClosestPoint(currentHitBox.transform.position);
-
             var isKill = damageAble.OnDamage(damageAmount,
-                damagePoint,
+                hitPoint,
                 Vector3.up);
 
             CheckKill(isKill);
 
             var damageVFX = ObjectPoolManager.Instance.Get(currentAttackInfo.damagedVfx.name);
-            damageVFX.transform.position = damagePoint;
+            damageVFX.transform.position = hitPoint;
         }
     }
 
-    public void Damage(Collider2D hitBox, Collider2D collider)
-    {
-        var damageAble = collider.GetComponent<IDamageable>();
-        var damageAmount = unitStatus.currentStatus.CalculateDamage();
-
-        Debug.Log("name : " + collider.gameObject.name + " | Damage : " + damageAmount);
-
-        if (damageAble != null)
-        {
-            if (useAttackAnimation)
-                CameraController.Instance.AnimateHit();
-
-            ++currentHitCount;
-            hitCountUpdateEvent?.Invoke(currentHitCount);
-
-            var damagePoint = collider.ClosestPoint(hitBox.transform.position);
-
-            var isKill = damageAble.OnDamage(damageAmount,
-                damagePoint,
-                Vector3.up);
-
-            CheckKill(isKill);
-
-            var damageVFX = ObjectPoolManager.Instance.Get(currentAttackInfo.damagedVfx.name);
-            damageVFX.transform.position = damagePoint;
-        }
-    }
-
-    private async void StartAttack()
+    protected virtual async void StartAttack()
     {
         AnimateTriggerDatas(currentAttackInfo.startTriggerList);
         startAttackEvent?.Invoke();
@@ -107,7 +77,7 @@ public class UnitAttack : SerializedMonoBehaviour
         UpdateAttack();
     }
 
-    private async void UpdateAttack()
+    protected virtual async void UpdateAttack()
     {
         //TODO :: Create VFX
 
@@ -138,21 +108,21 @@ public class UnitAttack : SerializedMonoBehaviour
         EndAttack();
     }
 
-    private async void EndAttack()
+    protected virtual async void EndAttack()
     {
         AnimateTriggerDatas(currentAttackInfo.endTriggerList);
         await UniTask.Delay((int)(currentAttackInfo.waitForEndTime * 1000));
         endAttackEvent?.Invoke();
     }
 
-    protected void CheckKill(bool isKill)
+    protected virtual void CheckKill(bool isKill)
     {
         if (!isKill)
             return;
 
     }
 
-    private void AnimateTriggerDatas(List<AnimatorTriggerData> triggerDatas)
+    protected virtual void AnimateTriggerDatas(List<AnimatorTriggerData> triggerDatas)
     {
         for (var i = 0; i < triggerDatas.Count; ++i)
         {

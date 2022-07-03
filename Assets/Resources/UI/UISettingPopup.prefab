@@ -823,6 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c805f6bae29ef6e48865ebca9bc34c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollRect: {fileID: 0}
   contentParent: {fileID: 255354777482465367}
   contentPrefab: {fileID: 1921218059655572219, guid: 02c8456002b287947bb7b6e976668ce5, type: 3}
   contentList: []
@@ -1603,7 +1604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2978.5515}
+  m_AnchoredPosition: {x: 0, y: 512.5485}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &255354777482465366
@@ -1767,6 +1768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202b64e41aee7f3478cbb5155e61035d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmVolumeSlider: {fileID: 255354777323117768}
+  sfxVolumeSlider: {fileID: 255354778036034832}
 --- !u!1 &255354777523807950
 GameObject:
   m_ObjectHideFlags: 0

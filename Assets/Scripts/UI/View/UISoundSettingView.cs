@@ -5,17 +5,27 @@ using UnityEngine.UI;
 
 public class UISoundSettingView : MonoBehaviour
 {
+    SoundManager soundManager;
+
+    public Slider bgmVolumeSlider;
+    public Slider sfxVolumeSlider;
+
+    private void Start()
+    {
+        soundManager = SoundManager.Instance;
+
+        bgmVolumeSlider.value = soundManager.BGMVolume;
+        sfxVolumeSlider.value = soundManager.SFXVolume;
+    }
 
     public void UpdateBGM(float value)
     {
-        //TODO :: Sound 연결
-
+        soundManager.ChangeBGMVolume(value);
     }
 
     public void UpdateSFX(float value)
     {
-        //TODO :: Sound 연결
-
+        soundManager.ChangeSFXVolume(value);
     }
 
 }

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDontDestroy: 1
+  originStatusData: {fileID: 11400000, guid: 46dc139a7cfacfb46867877d65fc3d1a, type: 2}
   currentStatus:
     statusDic:
       keys: 

@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f331316cec5fb32499a3fcfd4753ee06, type: 3}
-  m_Name: WeaponRotateLoop
+  m_Script: {fileID: 11500000, guid: 66d0af70ae514764381c64edaaf23e1d, type: 3}
+  m_Name: UISceneFadeIn_HoleScale
   m_EditorClassIdentifier: 
-  animationName: 
-  duration: 1
+  animationName: FadeIn_Hole
+  duration: 0.5
   delay: 0
-  animationType: 2
-  easeType: 4
+  animationType: 3
+  easeType: 1
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -41,8 +41,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  loopCount: 9999
-  loopType: 0
+  loopCount: 1
+  loopType: 1
   destinationFloat: 0
-  destinationVector: {x: 0, y: 0, z: 360}
-  isRelative: 1
+  destinationVector: {x: 0, y: 0, z: 1}
+  destinationColor: {r: 0, g: 0, b: 0, a: 0}
+  isRelative: 0

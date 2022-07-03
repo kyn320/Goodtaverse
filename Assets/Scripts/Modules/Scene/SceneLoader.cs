@@ -8,6 +8,26 @@ using Cysharp.Threading.Tasks;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
+    [SerializeField]
+    private string loadingSceneName;
+    [SerializeField]
+    private string nextSceneName;
+
+    public void SwitchScene(string nextScene)
+    {
+        nextSceneName = nextScene;
+        FadeController.Instance.FadeIn(() =>
+        {
+            LoadScene(loadingSceneName);
+        });
+    }
+
+    public void LoadNextScene()
+    {
+        LoadScene(nextSceneName);
+        nextSceneName = "";
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
@@ -19,15 +39,16 @@ public class SceneLoader : Singleton<SceneLoader>
         endAction?.Invoke();
     }
 
-    public async Task LoadSceneAsync(string sceneName, LoadSceneMode loadMode = LoadSceneMode.Single, bool allowActive = true ,UnityAction<float> loadAction = null, UnityAction endAction = null)
+    public async Task LoadSceneAsync(string sceneName, LoadSceneMode loadMode = LoadSceneMode.Single, bool allowActive = true, UnityAction<float> loadAction = null, UnityAction endAction = null)
     {
-        var asyncOper = SceneManager.LoadSceneAsync(sceneName,loadMode);
+        var asyncOper = SceneManager.LoadSceneAsync(sceneName, loadMode);
         asyncOper.allowSceneActivation = allowActive;
 
-        do {
+        do
+        {
             loadAction?.Invoke(asyncOper.progress);
             await UniTask.Yield(PlayerLoopTiming.Update);
-        }while (asyncOper.isDone);
+        } while (asyncOper.isDone);
 
         endAction?.Invoke();
     }
